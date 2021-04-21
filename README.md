@@ -1,7 +1,9 @@
 # NLW-NodeJS
  Semana do Next Level Week da Rocket Seat da trilha do NodeJS
 
- #Aula 1
+ ##Aula 1 -Liftoff
+ 
+ ### Dia 1 - Fundamentos do NodeJS
 
 Vamos desenvolver uma aplicação back-end de um chatbot utilizando WebSocket 
 
@@ -26,9 +28,9 @@ Métodos que vai ser utilizada no projeto para criar as rotas:
 
 No projeto iremos utilizar bastante o conceito de retorno os métodos em JSON
 
-## Aula 2
+## Aula 2 - Maximum Speed
 
-Dia 2 - Iniciando com o Banco de Dados
+### Dia 2 - Iniciando com o Banco de Dados
 
 Iremos trabalhar com banco de dados relacional e utilizar o Postgres.js
 
