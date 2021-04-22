@@ -2,16 +2,20 @@
  Semana do Next Level Week da Rocket Seat da trilha do NodeJS
 
  ## Aula 1 -Liftoff
+ Projeto da Criação do Back-end de Chat
 
  Assuntos abordados na aula:
- 
- - Formas de trabalhar com Banco de Dados
- - TypeORM
- - O que são migrations
- - Criação de migrations
- - Criação de entidades
- - Criação de repositórios
- - Criação de rota de configurações
+    - O que é o projeto?
+    - O que é NodeJS?
+    - O que é uma API?
+    - Uso do TypeScript
+    - Criação do projeto
+        - Conhecer tipos de métodos
+        - Criação da primeira rota
+        - Rota POST
+        - Configuração do visualizador de método Post (Insomnia ou Postman)
+
+
  
  ### Dia 1 - Fundamentos do NodeJS
 
