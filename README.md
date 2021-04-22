@@ -2,6 +2,16 @@
  Semana do Next Level Week da Rocket Seat da trilha do NodeJS
 
  ## Aula 1 -Liftoff
+
+ Assuntos abordados na aula:
+ 
+ - Formas de trabalhar com Banco de Dados
+ - TypeORM
+ - O que são migrations
+ - Criação de migrations
+ - Criação de entidades
+ - Criação de repositórios
+ - Criação de rota de configurações
  
  ### Dia 1 - Fundamentos do NodeJS
 
@@ -29,6 +39,16 @@ Métodos que vai ser utilizada no projeto para criar as rotas:
 No projeto iremos utilizar bastante o conceito de retorno os métodos em JSON
 
 ## Aula 2 - Maximum Speed
+
+Assuntos abordados na aula:
+
+ - Formas de trabalhar com Banco de Dados
+ - TypeORM
+ - O que são migrations
+ - Criação de migrations
+ - Criação de entidades
+ - Criação de repositórios
+ - Criação de rota de configurações
 
 ### Dia 2 - Iniciando com o Banco de Dados
 
