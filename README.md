@@ -211,10 +211,10 @@ Body Params = Inserir objetos dentro das requisições, sempre por meio de JSON
 
 No express é preciso definir para aceitar requisições através de JSON's
 
-"""
+
 app.use(express.json())
 
-"""
+
 
 OBS: Na hora de salvar os dados de data, ele vem com 3 horas a mais do horário do Brasil, é necessário ajustar o GMT, por padrão ele utiliza o padrão UTC
 
