@@ -90,30 +90,30 @@ Para criar uma migration utiliza-se o comando (yarn/npm) typeorm migration:creat
 A estrutura do migration tem duas funções async (up e down)
 
 Estrutura UP:
-"""
+
     public async down(queryRunner: QueryRunner): Promise<void> {
         /// Tabelas a serem executadas aqui
     }
-"""
+
 
 Up - Vai rodar tudo que tiver dentro do método Up, toda vez que para criar a migration, necessita ser executado no Up
      Comando para executar o método de migration - yarn/npm typeorm migration:run
 
 
 Estrutura Down:
-"""
+
     public async down(queryRunner: QueryRunner): Promise<void> {
         /// Tabelas a serem excluidas(revertidas) aqui
 
 
 
     }
-"""
+
 Down - Deu alguma coisa errada ou precisa reverter algo, colocar toda a estrutura dentro do down
      Comando para executar o revert yarn/npm migration:revert
 
 Para criar uma tabela utiliza dentro do método up
-"""
+
         await queryRunner.createTable({
             name: (nome da tabela),
             columns: [
@@ -125,13 +125,13 @@ Para criar uma tabela utiliza dentro do método up
                 }
             ]
         })
-"""
+
 
 Esses valores são criado dentro do UP, caso necessita remover a tabela, somente colocar dentro do método down:
-"""
+
     await queryRunner.dropTable("nome da tabela")
 
-"""
+
 
 UUID - Identificador Único
 
@@ -146,7 +146,7 @@ Para conseguir utilizar o ts nas entities é necessário alterar descomentar dua
 Após isso você consegue utilizar os relacionamentos
 
 Importo as relações do typeorm:
-"""
+
 import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryColumn} from "typeorm"
 
 @Entity("De qual tabela é entidade")
@@ -161,7 +161,7 @@ class NomedaEntidade {
     @UpdateDateColumn // @CreateDateColumn
     updated_at or created_at: Date; // Definir sempre eles como Date
 }
-"""
+
 
 Para definir os id poderiamos deixar a responsabilidade pro banco de dados, mas não temos certeza de como sera o comportamento dos bancos, definiremos que o projeto ira definir o uuid para poder nós não precisamos preocupar com qual banco iremos utilizar no projeto
 
@@ -173,10 +173,10 @@ Depedência a ser acrescentada:
 Ele também possui tipagems de desenvolvimento também ira ser acrescentada ao projeto
 
 a V4 do uuid utiliza-se números aleatórios para criar id e para importa os mesmos utiliza-se:
-"""
+
 import { v4 as uuid } from "uuid"
 
-"""
+
 Foi criada uma classe de construtor para verificar se o Id da Setting está preenchido, pois quando trabalhamos com atualização, ele irá simplesmente verificar e manter o id ao invés de sempre gerar um id diferente toda vez que for atualizado
 
 Uma config importante para definir no ormconfig.json é mapear suas entidades
@@ -187,15 +187,13 @@ Os repositórios são responsáveis pela comunicação entre a nossa entidade e 
 
 No repository utilizaremos uma classe estendida o Repository de dentro do ORM, e essa classe possui ja varios padrões configurado, como Create,Save,Select,etc...
 
-"""
+
 import { Repository } from "typeorm";
 
 @EntityRepository(Setting)
 class SettingsRepository extends Repository<Passar o tipo de entidade aqui>{
 
 }
-
-"""
 
 Criado também um arquivo de router.ts na raiz do src para definir as rotas da aplicação importando o Router do Express
 
@@ -223,3 +221,39 @@ OBS: Na hora de salvar os dados de data, ele vem com 3 horas a mais do horário 
 Para separar melhor o projeto iremos criar o controller
 
 Controller é uma classe de comunicação entre a rota e o repositório
+
+## Aula 3 - In Orbit
+
+Assuntos abordados na aula:
+    - Separar a regra de negócio de settings
+    - Criar estrutura de user
+    - Criar estrutura de connections
+        - Relacionamento One to One
+    - Criar estrutura de messages
+        - Relacionamento Many to One
+
+### Dia 3 - Continuando a nossa aplicação
+
+Retirando do controller as funções de settings para poder usar-lo como sua real função onde vai ser o comunicador entre eles
+Foi criado o SettingsServices para as regras de negócio da aplicação, todas as verificações da regra de negócio
+
+Criado alguns métodos de comparação e restrição como:
+- Verificação de Usuário
+- Criando usuário e verificando se tem chat disponivel
+
+Nos SettingsController foi criado uma tratativa de erro para verificar se usuário ja existe em um try() e catch()
+
+Foi criado uma migration para cadastrar tabela CreateUsers, é importante utilizar o ID como Primary Key, pois ele vai ser usada como tabela de relacionamento
+
+Preciso fixar conhecimento meu em relação a estrutura do src, e entender de fato o conceito de:
+- Controller
+- entities
+- repositories
+- services
+- database
+routes
+server
+
+Principalmente as 5 bases de organização de arquivos
+
+Continuar video a partir do 32:17
