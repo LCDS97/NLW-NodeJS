@@ -256,4 +256,22 @@ server
 
 Principalmente as 5 bases de organização de arquivos
 
-Continuar video a partir do 32:17
+Ja foi criado a estrutura de users com a verificação de usuário
+
+Iremos fazer a tabela de mensagem com uma nova migration, essa tabela vai trabalhar com relacionamentos
+
+Para definir foreignKeys no migrations utiliza se o método de foreignKeys: e definindo dentro de arrays após as colunas serem feitas
+
+foreignKeys: [
+                {
+                    name: "Nome da Foreign Key",
+                    referencedTableName: "Tabela que vai ser a referencia",
+                    referencedColumnNames: ["A coluna a ser referenciada"],
+                    columnNames:["O nome da coluna que esta sendo referencia"]
+                    OnDelete:"O que vai fazer quando a referencia for excluida"
+                    OnDelete:"O que vai fazer quando a referencia for atualizada"
+                }
+            ]
+
+
+
