@@ -313,4 +313,19 @@ ex:
     }
 
 
+Para evitar a redundancia de código, iremos utilizar para os métodos chamar um atributo do getCustomRepository
+
+Dentro da classe, definimos como private significa que o atributo que vai criar só vai estar disponivel pela classe que esta criando ele
+
+## Aula 4 - Landing
+
+- Assuntos abordado na aula:
+    - O que é Websocket
+    - Instalando depedendicas da aplicação
+    - Configurando websocket
+    - Criar estrutura de connections
+    - Configurando atendente HTML
+    - Recap
+    
+
 
