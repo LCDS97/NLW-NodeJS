@@ -327,5 +327,80 @@ Dentro da classe, definimos como private significa que o atributo que vai criar 
     - Configurando atendente HTML
     - Recap
     
+### Dia 4 - Continuando a nossa aplicação
+
+Rever video dps para entender o conceito do webSocket
+
+Iremos utilizar o Socket.io para o WebSocket, com suas tipagens e para o client e o ejs para conversão do html
+
+yarn add socket.io
+yarn add socket.io-client
+yarn add @types/socket.io -D
+yarn add ejs
 
 
+Estamos criando no server.ts os protocolos http e protocolo ws, necessário importar o createServer do próprio node e Server e Socket do socket.io
+
+Depois duas constantes do http e do io para criar no servidor
+
+No projeto vai ter dois arquivos de webSocket, um somente para o cliente e um para o admin/atendente
+
+Vamos separar em dois arquivos para melhor estrutura do código mas vai ser na mesmo WebSocket de servidor (io que é o http no server.ts)
+
+Importamos a pasta public para trabalhar a aplicação encima do front-end, utilizamos o view engine do próprio nodejs para identificar páginas e visualizar
+
+Para construir o caminho de um arquivo utilizamos um módulo do próprio node:
+
+import path from "path";
+
+Configuração do html para o node fica da seguinte fomra
+
+app.use(express.static(path.join(__dirname,"..","public"))); // Informando que é a pasta public aonde se encontra
+app.set("views", path.join(__dirname,"..", "public")); // Informando que a views se encontra também na public
+app.engine("html", require("ejs").renderFile); // Convertendo do ejs para html pois o padrão de leitura do node é ejs
+app.set("view engine", "html"); // renderezando view engine para configurar o html
+
+Depois é criada uma rota GET para renderizar a página com o response.render
+
+Foi separado os arquivos de do server.ts para um novo arquivo http.ts, para os dois websocket conseguir utilizar o protócolo do io
+
+Vão ser criados eventos de client e admin é necessário definir nomes diferentes os evento para poder diferenciar no futuro
+Toda vez que for criar para cliente vai ser adicionado um prefixo de cliente e outro para adm
+
+Foi criado o socket on connect pegando os parametros que o cliente ira enviar
+
+Criado no js função para trocar os chats após enviar mensagem e definido nos params do email e text, agora iremos armazenar essa informações, o fluxo ira sera da seguinte forma
+
+Agora iremos criar a tabela de conexão para salvar no socket io para gerenciar as conexões, armazenando o id do usuário e o id do socket, quando o cliente estiver em atendimento vai disponibilizar uma tela para visualizar todos os clientes que estão com admin e para ele enviar uma mensagem ao cliente ele vai necessitar do socket id do mesmo
+
+Criando o migration: yarn typeorm migration:create -n CreateConnection
+
+Iremos utilizar outro método para criar a chave estrangeira
+ex:
+
+        await queryRunner.createForeignKey(
+            "connections",
+            new TableForeignKey({
+                name: "FKConnectionsUser",
+                referencedTableName: "users",
+                referencedColumnNames: ["id"],
+                columnNames:["user_id"],
+                onDelete: "SET NULL",
+                onUpdate: "SET NULL",
+            })
+        )
+
+Foi criado a estrutura do connections no controllers, entities, repositories e services e integrado ao client.ts para ter acesso as funções de create
+
+Criando métodos de mensagem, para poder um usuário se conecta e sobrescever sua conexão e não precisar criar outras varias
+foi definido um método para sobrescever seu socket_id existente, quando é o primeiro acesso também foi definido de cadastrar seu e-mail, caso o mesmo e-mail ja foi acessado/cadastrado é sobrespo o socket_id do mesmo
+
+Agora estamos salvando a mensagem utilizando os métodos do MessagesService, definindo primeiro o user.id como nulo e depois verificando se o user.id esta preenchido para salvar a mensagem, através 
+
+OBS: Não verifiquei de colocar a interface do Iparams no client.ts pois quando configuro aparece o seguinte erro:
+ERROR EntityMetadataNotFound: No metada for "Connection" was found, as vezes não aparece somente quando fica por um tempo com o servidor
+
+Colocando um método para listar as configurações do usuário no settings pesquisando pelo seu username(email), e devolvendo suas configurações de conta, foi habilitado no html para ele receber através de paramêtro e criado no settingsController a função para requisitar dos parametros e devolver suas configurações em JSON
+Foi criado uma rota em routes.ts recebendo o parametro do username e chamando a função findByUsername
+
+Foi criada a rota de update de Chat por uma rota adicionado e atualizado pelo seu parametro
