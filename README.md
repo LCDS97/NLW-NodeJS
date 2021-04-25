@@ -273,5 +273,44 @@ foreignKeys: [
                 }
             ]
 
+Ao criar uma coluna com relacionamento para fim de entender melhor o schema do banco podemos colocar dentro da tabela o mesmo para definir
+e atribui com as seguintes caracteres
+
+ex:
+
+    @JoinColumn({ name: "user_id" })
+    @ManyToOne(() => User)
+    user: User;
+
+    @Column()
+    user_id: string;
+
+Quando definir interfaces para os services utilizamos a nomeclatura de "I" para melhor identificação das interfaces
+
+Quase algum parametro seja opcional você pode definir na interface com o "?" antes dos ":".
+ex:
+
+interface IMessageCreate {
+    admin_id?: string;
+    text: string;
+    user_id: string;
+}
+
+Foi criado uma rota get de ShowByUser para recuperar os id de quem mandou a mensagem tanto em relação ao adm ou ao user
+
+Caso queira queira puxar as mensagens com outras propriedades do usuário na hora de declarar a lista pode ser utilizado o relations para puxar demais informações, basta colocar o mesmo nome que foi dado na "entities"
+ex:
+
+    async listByUser(user_id: string){
+        const messagesRepository = getCustomRepository(MessagesRepository)
+        
+        const list = await messagesRepository.find({
+            where: {user_id},
+            relations: ["user"],
+        });
+
+        return list;
+    }
+
 
 
