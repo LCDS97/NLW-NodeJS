@@ -261,7 +261,7 @@ Ja foi criado a estrutura de users com a verificação de usuário
 Iremos fazer a tabela de mensagem com uma nova migration, essa tabela vai trabalhar com relacionamentos
 
 Para definir foreignKeys no migrations utiliza se o método de foreignKeys: e definindo dentro de arrays após as colunas serem feitas
-
+```
 foreignKeys: [
                 {
                     name: "Nome da Foreign Key",
@@ -273,11 +273,13 @@ foreignKeys: [
                 }
             ]
 
+```
 Ao criar uma coluna com relacionamento para fim de entender melhor o schema do banco podemos colocar dentro da tabela o mesmo para definir
 e atribui com as seguintes caracteres
 
 ex:
 
+```
     @JoinColumn({ name: "user_id" })
     @ManyToOne(() => User)
     user: User;
@@ -285,6 +287,7 @@ ex:
     @Column()
     user_id: string;
 
+```
 Quando definir interfaces para os services utilizamos a nomeclatura de "I" para melhor identificação das interfaces
 
 Quase algum parametro seja opcional você pode definir na interface com o "?" antes dos ":".
@@ -301,6 +304,7 @@ Foi criado uma rota get de ShowByUser para recuperar os id de quem mandou a mens
 Caso queira queira puxar as mensagens com outras propriedades do usuário na hora de declarar a lista pode ser utilizado o relations para puxar demais informações, basta colocar o mesmo nome que foi dado na "entities"
 ex:
 
+```
     async listByUser(user_id: string){
         const messagesRepository = getCustomRepository(MessagesRepository)
         
@@ -312,6 +316,7 @@ ex:
         return list;
     }
 
+```
 
 Para evitar a redundancia de código, iremos utilizar para os métodos chamar um atributo do getCustomRepository
 
@@ -356,14 +361,16 @@ import path from "path";
 Configuração do html para o node fica da seguinte forma:
 
 
-"""
+
+```
 
 app.use(express.static(path.join(__dirname,"..","public"))); // Informando que é a pasta public aonde se encontra
 app.set("views", path.join(__dirname,"..", "public")); // Informando que a views se encontra também na public
 app.engine("html", require("ejs").renderFile); // Convertendo do ejs para html pois o padrão de leitura do node é ejs
 app.set("view engine", "html"); // renderezando view engine para configurar o html
 
-"""
+
+```
 
 Depois é criada uma rota GET para renderizar a página com o response.render
 
@@ -383,6 +390,7 @@ Criando o migration: yarn typeorm migration:create -n CreateConnection
 Iremos utilizar outro método para criar a chave estrangeira
 ex:
 
+```
         await queryRunner.createForeignKey(
             "connections",
             new TableForeignKey({
@@ -395,6 +403,7 @@ ex:
             })
         )
 
+```
 Foi criado a estrutura do connections no controllers, entities, repositories e services e integrado ao client.ts para ter acesso as funções de create
 
 Criando métodos de mensagem, para poder um usuário se conecta e sobrescever sua conexão e não precisar criar outras varias
