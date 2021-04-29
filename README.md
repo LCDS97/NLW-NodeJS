@@ -353,12 +353,17 @@ Para construir o caminho de um arquivo utilizamos um módulo do próprio node:
 
 import path from "path";
 
-Configuração do html para o node fica da seguinte fomra
+Configuração do html para o node fica da seguinte forma:
+
+
+"""
 
 app.use(express.static(path.join(__dirname,"..","public"))); // Informando que é a pasta public aonde se encontra
 app.set("views", path.join(__dirname,"..", "public")); // Informando que a views se encontra também na public
 app.engine("html", require("ejs").renderFile); // Convertendo do ejs para html pois o padrão de leitura do node é ejs
 app.set("view engine", "html"); // renderezando view engine para configurar o html
+
+"""
 
 Depois é criada uma rota GET para renderizar a página com o response.render
 
